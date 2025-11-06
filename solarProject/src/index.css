@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+* {
+  font-family: "Cinzel", serif;
+}
 
 /* src/index.css */
 @layer utilities {
