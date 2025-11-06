@@ -51,28 +51,34 @@ export default function LegalPersonForm() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Razão Social */}
       <div className="md:col-span-2">
-        <label className="block text-sm font-medium text-gray-600 mb-1">Razão Social</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Razão Social</label>
         <input
           type="text"
           placeholder="Empresa Exemplo Ltda"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+          className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
         />
       </div>
 
       {/* Nome Fantasia */}
       <div className="md:col-span-2">
-        <label className="block text-sm font-medium text-gray-600 mb-1">Nome Fantasia</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Nome Fantasia</label>
         <input
           type="text"
           placeholder="Exemplo Solar"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+          className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
         />
       </div>
 
       {/* CNPJ com máscara */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">CNPJ</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">CNPJ</label>
         <div className="relative">
           <input
             type="text"
@@ -81,7 +87,10 @@ export default function LegalPersonForm() {
             placeholder="00.000.000/0001-00"
             maxLength={18}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+            className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
           />
           <i className="fas fa-building absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
@@ -89,36 +98,45 @@ export default function LegalPersonForm() {
 
       {/* Inscrição Estadual com máscara */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">Inscrição Estadual</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Inscrição Estadual</label>
         <input
           type="text"
           value={ie}
           onChange={(e) => setIe(applyMask(e.target.value, 'ie'))}
           placeholder="000.000.000.000"
           maxLength={15}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+          className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
         />
       </div>
 
       {/* Data de abertura */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">Data de abertura</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Data de abertura</label>
         <input
           type="date"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm"
+          className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
         />
       </div>
 
       {/* E-mail comercial */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">E-mail comercial</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">E-mail comercial</label>
         <div className="relative">
           <input
             type="email"
             placeholder="contato@exemplo.com"
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+            className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
           />
           <i className="fas fa-envelope absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
@@ -126,7 +144,7 @@ export default function LegalPersonForm() {
 
       {/* Telefone com máscara */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">Telefone principal</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Telefone principal</label>
         <div className="relative">
           <input
             type="text"
@@ -135,7 +153,10 @@ export default function LegalPersonForm() {
             placeholder="(00) 0000-0000"
             maxLength={15}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+            className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
           />
           <i className="fas fa-phone absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
@@ -143,12 +164,15 @@ export default function LegalPersonForm() {
 
       {/* Site institucional */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">Site institucional (opcional)</label>
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Site institucional (opcional)</label>
         <div className="relative">
           <input
             type="url"
             placeholder="https://www.exemplo.com"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 focus:shadow-sm placeholder:text-gray-400"
+            className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
+          style={{ borderColor: '#819067' }}
+          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
+          onBlur={(e) => e.target.style.borderColor = '#819067'}
           />
           <i className="fas fa-globe absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
@@ -158,7 +182,7 @@ export default function LegalPersonForm() {
       <AddressFields />
 
       {/* Botão de cadastro */}
-      <button className="md:col-span-2 mt-4 flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 hover:-translate-y-px hover:shadow-md transition">
+      <button className="md:col-span-2 mt-4 flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 text-white font-semibold rounded-lg hover:-translate-y-px hover:shadow-md transition" style={{ backgroundColor: '#0A400C' }}>
         <i className="fas fa-building"></i> Cadastrar Empresa
       </button>
     </div>
