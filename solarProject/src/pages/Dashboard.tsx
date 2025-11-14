@@ -256,14 +256,14 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Botão de atualizar */}
+        {/* Botão de Página Principal */}
         <div className="mt-8 text-center">
-          <button
-            onClick={loadData}
-            className="px-6 py-3 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+          <Link
+            to="/home"
+            className="inline-block px-6 py-3 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
           >
-            Atualizar Dados
-          </button>
+            Página Principal
+          </Link>
         </div>
       </div>
     </div>
