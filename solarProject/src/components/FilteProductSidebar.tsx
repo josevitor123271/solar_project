@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Slider } from '@/components/ui/slider';
+import { motion } from 'framer-motion';
 
 // Definição dos tipos
 type Categoria = 
@@ -52,22 +53,10 @@ export default function FilteProductSidebar({ onFiltrosChange }: FilteProductSid
   ];
 
   // Lista de marcas (exemplo)
-  const marcas: Marca[] = [
-    'SolarTech',
-    'EcoEnergy',
-    'GreenPower',
-    'SunPower',
-    'SolarMax'
-  ];
+  const marcas: Marca[] = ['LG', 'Samsung', 'Panasonic', 'Canadian Solar', 'Trina Solar'];
 
   // Lista de tipos de produtos (exemplo)
-  const tiposProduto: TipoProduto[] = [
-    'Residencial',
-    'Comercial',
-    'Industrial',
-    'Portátil',
-    'Integrado'
-  ];
+  const tiposProduto: TipoProduto[] = ['Residencial', 'Comercial', 'Industrial'];
 
   // Função para lidar com a seleção de categorias
   const handleCategoriaChange = (categoria: Categoria) => {
@@ -76,15 +65,21 @@ export default function FilteProductSidebar({ onFiltrosChange }: FilteProductSid
       : [...categoriasSelecionadas, categoria];
     
     setCategoriasSelecionadas(novasCategorias);
-    onFiltrosChange({
-      categorias: novasCategorias,
-      precoMin,
-      precoMax,
-      feedback,
-      marcas: marcasSelecionadas,
-      tiposProduto: tiposProdutoSelecionados,
-      disponivel
-    });
+    enviarFiltros(novasCategorias, precoMin, precoMax, feedback, marcasSelecionadas, tiposProdutoSelecionados, disponivel);
+  };
+
+  // Função para lidar com a mudança de preço
+  const handlePrecoChange = (value: number[]) => {
+    const [min, max] = value;
+    setPrecoMin(min);
+    setPrecoMax(max);
+    enviarFiltros(categoriasSelecionadas, min, max, feedback, marcasSelecionadas, tiposProdutoSelecionados, disponivel);
+  };
+
+  // Função para lidar com a mudança de feedback
+  const handleFeedbackChange = (value: number) => {
+    setFeedback(value);
+    enviarFiltros(categoriasSelecionadas, precoMin, precoMax, value, marcasSelecionadas, tiposProdutoSelecionados, disponivel);
   };
 
   // Função para lidar com a seleção de marcas
@@ -94,15 +89,7 @@ export default function FilteProductSidebar({ onFiltrosChange }: FilteProductSid
       : [...marcasSelecionadas, marca];
     
     setMarcasSelecionadas(novasMarcas);
-    onFiltrosChange({
-      categorias: categoriasSelecionadas,
-      precoMin,
-      precoMax,
-      feedback,
-      marcas: novasMarcas,
-      tiposProduto: tiposProdutoSelecionados,
-      disponivel
-    });
+    enviarFiltros(categoriasSelecionadas, precoMin, precoMax, feedback, novasMarcas, tiposProdutoSelecionados, disponivel);
   };
 
   // Função para lidar com a seleção de tipos de produto
@@ -112,59 +99,13 @@ export default function FilteProductSidebar({ onFiltrosChange }: FilteProductSid
       : [...tiposProdutoSelecionados, tipo];
     
     setTiposProdutoSelecionados(novosTipos);
-    onFiltrosChange({
-      categorias: categoriasSelecionadas,
-      precoMin,
-      precoMax,
-      feedback,
-      marcas: marcasSelecionadas,
-      tiposProduto: novosTipos,
-      disponivel
-    });
+    enviarFiltros(categoriasSelecionadas, precoMin, precoMax, feedback, marcasSelecionadas, novosTipos, disponivel);
   };
 
-  // Função para lidar com a mudança de preço
-  const handlePrecoChange = (value: number[]) => {
-    const [min, max] = value;
-    setPrecoMin(min);
-    setPrecoMax(max);
-    onFiltrosChange({
-      categorias: categoriasSelecionadas,
-      precoMin: min,
-      precoMax: max,
-      feedback,
-      marcas: marcasSelecionadas,
-      tiposProduto: tiposProdutoSelecionados,
-      disponivel
-    });
-  };
-
-  // Função para lidar com a mudança de feedback
-  const handleFeedbackChange = (value: number) => {
-    setFeedback(value);
-    onFiltrosChange({
-      categorias: categoriasSelecionadas,
-      precoMin,
-      precoMax,
-      feedback: value,
-      marcas: marcasSelecionadas,
-      tiposProduto: tiposProdutoSelecionados,
-      disponivel
-    });
-  };
-
-  // Função para lidar com a mudança de disponibilidade
+  // Função para lidar com a seleção de disponibilidade
   const handleDisponivelChange = (value: boolean | null) => {
     setDisponivel(value);
-    onFiltrosChange({
-      categorias: categoriasSelecionadas,
-      precoMin,
-      precoMax,
-      feedback,
-      marcas: marcasSelecionadas,
-      tiposProduto: tiposProdutoSelecionados,
-      disponivel: value
-    });
+    enviarFiltros(categoriasSelecionadas, precoMin, precoMax, feedback, marcasSelecionadas, tiposProdutoSelecionados, value);
   };
 
   // Função para limpar todos os filtros
@@ -176,172 +117,283 @@ export default function FilteProductSidebar({ onFiltrosChange }: FilteProductSid
     setMarcasSelecionadas([]);
     setTiposProdutoSelecionados([]);
     setDisponivel(null);
-    
+    enviarFiltros([], 0, 1000, 0, [], [], null);
+  };
+
+  // Função para enviar os filtros atualizados para o componente pai
+  const enviarFiltros = (
+    cats: Categoria[],
+    min: number,
+    max: number,
+    fb: number,
+    marcas: Marca[],
+    tipos: TipoProduto[],
+    disp: boolean | null
+  ) => {
     onFiltrosChange({
-      categorias: [],
-      precoMin: 0,
-      precoMax: 1000,
-      feedback: 0,
-      marcas: [],
-      tiposProduto: [],
-      disponivel: null
+      categorias: cats,
+      precoMin: min,
+      precoMax: max,
+      feedback: fb,
+      marcas: marcas,
+      tiposProduto: tipos,
+      disponivel: disp
     });
   };
 
   return (
-    <div className="w-[300px] h-full bg-white p-0 rounded-lg flex flex-col">
-      <div className="flex justify-between items-center p-4 border-b">
-        <h2 className="text-xl font-bold text-gray-800">Filtros</h2>
-        <button 
-          onClick={limparFiltros}
-          className="text-sm text-blue-500 hover:text-blue-700"
-        >
-          Limpar tudo
-        </button>
-      </div>
+    <motion.div 
+      className="w-[300px] bg-white rounded-lg p-0 h-full"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Cabeçalho do filtro */}
+      <motion.div 
+        className="p-4 border-b border-gray-200"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+      >
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-lg font-semibold text-gray-800">Filtros</h2>
+          <motion.button 
+            onClick={limparFiltros}
+            className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Limpar tudo
+          </motion.button>
+        </div>
+        <p className="text-sm text-gray-600">Ajuste os filtros para encontrar os produtos ideais</p>
+      </motion.div>
 
-      {/* Área de scroll para os filtros */}
-      <div className="flex-grow overflow-y-auto p-4">
-        {/* Filtro por Categorias */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-700">Categorias</h3>
+      {/* Conteúdo dos filtros */}
+      <motion.div 
+        className="p-4 overflow-y-auto h-[calc(100%-80px)]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
+      >
+        {/* Seção de Categorias */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
+        >
+          <h3 className="text-md font-semibold text-gray-800 mb-3">Categorias</h3>
           <div className="space-y-2">
-            {categorias.map((categoria) => (
-              <label key={categoria} className="flex items-center">
+            {categorias.map((categoria, index) => (
+              <motion.label 
+                key={categoria}
+                className="flex items-center space-x-2 cursor-pointer"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: 0.3 + index * 0.05 }}
+                whileHover={{ x: 5 }}
+              >
                 <input
                   type="checkbox"
                   checked={categoriasSelecionadas.includes(categoria)}
                   onChange={() => handleCategoriaChange(categoria)}
-                  className="mr-2 h-4 w-4 text-blue-600 rounded"
+                  className="rounded text-blue-600 focus:ring-blue-500"
                 />
-                <span className="text-gray-600">{categoria}</span>
-              </label>
+                <span className="text-sm text-gray-700">{categoria}</span>
+              </motion.label>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Filtro por Preço */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-700">Preço</h3>
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-1">
-                <span className="text-gray-600">R$ {precoMin}</span>
-                <span className="text-gray-600">R$ {precoMax}</span>
-              </div>
-              <Slider 
-                min={0} 
-                max={1000} 
-                value={[precoMin, precoMax]} 
-                onValueChange={handlePrecoChange}
-                className="w-full"
-              />
+        {/* Seção de Preço */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+        >
+          <h3 className="text-md font-semibold text-gray-800 mb-3">Preço (R$)</h3>
+          <div className="px-1">
+            <Slider
+              min={0}
+              max={1000}
+              value={[precoMin, precoMax]}
+              onValueChange={handlePrecoChange}
+              minStepsBetweenThumbs={1}
+              step={10}
+              className="mb-4"
+            />
+            <div className="flex justify-between text-sm text-gray-600">
+              <span>R$ {precoMin}</span>
+              <span>R$ {precoMax}</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Filtro por Feedback */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-700">Avaliações</h3>
+        {/* Seção de Feedback */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.5 }}
+        >
+          <h3 className="text-md font-semibold text-gray-800 mb-3">Avaliações</h3>
           <div className="space-y-2">
-            {[5, 4, 3, 2, 1].map((stars) => (
-              <label key={stars} className="flex items-center">
+            {[5, 4, 3, 2, 1].map((stars, index) => (
+              <motion.label 
+                key={stars}
+                className="flex items-center space-x-2 cursor-pointer"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: 0.5 + index * 0.05 }}
+                whileHover={{ x: 5 }}
+              >
                 <input
                   type="radio"
                   name="feedback"
                   checked={feedback === stars}
                   onChange={() => handleFeedbackChange(stars)}
-                  className="mr-2 h-4 w-4 text-blue-600"
+                  className="rounded text-blue-600 focus:ring-blue-500"
                 />
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <span 
-                      key={i} 
-                      className={`text-lg ${i < stars ? 'text-yellow-400' : 'text-gray-300'}`}
+                    <svg
+                      key={i}
+                      className={`w-4 h-4 ${i < stars ? 'text-yellow-400' : 'text-gray-300'}`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
                     >
-                      ★
-                    </span>
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
                   ))}
-                  <span className="ml-2 text-gray-600">& up</span>
+                  <span className="ml-2 text-sm text-gray-700">ou mais</span>
                 </div>
-              </label>
+              </motion.label>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Filtro por Marca */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-700">Marca</h3>
+        {/* Seção de Marcas */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
+        >
+          <h3 className="text-md font-semibold text-gray-800 mb-3">Marcas</h3>
           <div className="space-y-2">
-            {marcas.map((marca) => (
-              <label key={marca} className="flex items-center">
+            {marcas.map((marca, index) => (
+              <motion.label 
+                key={marca}
+                className="flex items-center space-x-2 cursor-pointer"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: 0.6 + index * 0.05 }}
+                whileHover={{ x: 5 }}
+              >
                 <input
                   type="checkbox"
                   checked={marcasSelecionadas.includes(marca)}
                   onChange={() => handleMarcaChange(marca)}
-                  className="mr-2 h-4 w-4 text-blue-600 rounded"
+                  className="rounded text-blue-600 focus:ring-blue-500"
                 />
-                <span className="text-gray-600">{marca}</span>
-              </label>
+                <span className="text-sm text-gray-700">{marca}</span>
+              </motion.label>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Filtro por Tipo de Produto */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-700">Tipo de Produto</h3>
+        {/* Seção de Tipo de Produto */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.7 }}
+        >
+          <h3 className="text-md font-semibold text-gray-800 mb-3">Tipo de Produto</h3>
           <div className="space-y-2">
-            {tiposProduto.map((tipo) => (
-              <label key={tipo} className="flex items-center">
+            {tiposProduto.map((tipo, index) => (
+              <motion.label 
+                key={tipo}
+                className="flex items-center space-x-2 cursor-pointer"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: 0.7 + index * 0.05 }}
+                whileHover={{ x: 5 }}
+              >
                 <input
                   type="checkbox"
                   checked={tiposProdutoSelecionados.includes(tipo)}
                   onChange={() => handleTipoProdutoChange(tipo)}
-                  className="mr-2 h-4 w-4 text-blue-600 rounded"
+                  className="rounded text-blue-600 focus:ring-blue-500"
                 />
-                <span className="text-gray-600">{tipo}</span>
-              </label>
+                <span className="text-sm text-gray-700">{tipo}</span>
+              </motion.label>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Filtro por Disponibilidade */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-700">Disponibilidade</h3>
+        {/* Seção de Disponibilidade */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.8 }}
+        >
+          <h3 className="text-md font-semibold text-gray-800 mb-3">Disponibilidade</h3>
           <div className="space-y-2">
-            <label className="flex items-center">
+            <motion.label 
+              className="flex items-center space-x-2 cursor-pointer"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.8 }}
+              whileHover={{ x: 5 }}
+            >
               <input
                 type="radio"
                 name="disponivel"
                 checked={disponivel === true}
                 onChange={() => handleDisponivelChange(true)}
-                className="mr-2 h-4 w-4 text-blue-600"
+                className="rounded text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-gray-600">Avaliados</span>
-            </label>
-            <label className="flex items-center">
+              <span className="text-sm text-gray-700">Em estoque</span>
+            </motion.label>
+            <motion.label 
+              className="flex items-center space-x-2 cursor-pointer"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.85 }}
+              whileHover={{ x: 5 }}
+            >
               <input
                 type="radio"
                 name="disponivel"
                 checked={disponivel === false}
                 onChange={() => handleDisponivelChange(false)}
-                className="mr-2 h-4 w-4 text-blue-600"
+                className="rounded text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-gray-600">Não avaliados</span>
-            </label>
-            <label className="flex items-center">
+              <span className="text-sm text-gray-700">Fora de estoque</span>
+            </motion.label>
+            <motion.label 
+              className="flex items-center space-x-2 cursor-pointer"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.9 }}
+              whileHover={{ x: 5 }}
+            >
               <input
                 type="radio"
                 name="disponivel"
                 checked={disponivel === null}
                 onChange={() => handleDisponivelChange(null)}
-                className="mr-2 h-4 w-4 text-blue-600"
+                className="rounded text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-gray-600">Todos</span>
-            </label>
+              <span className="text-sm text-gray-700">Todos</span>
+            </motion.label>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
