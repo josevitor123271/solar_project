@@ -98,7 +98,7 @@ export default function Dashboard() {
         <div className="mb-6">
           <Link
             to="/"
-            className="inline-block px-4 py-2 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+            className="inline-block px-4 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
           >
             ← Voltar para Registro
           </Link>
@@ -106,12 +106,12 @@ export default function Dashboard() {
 
         {/* Erro */}
         {error && (
-          <div className="mb-6 p-4 rounded-lg bg-red-100 border border-red-400 text-red-700">
+          <div className="mb-6 p-4 rounded-lg border border-red-400 text-red-700 bg-white">
             <p className="font-semibold">Erro:</p>
             <p>{error}</p>
             <button
               onClick={loadData}
-              className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              className="mt-2 px-4 py-2 text-[#111111] rounded hover:bg-[#99ddcc] bg-[#bfeadf]"
             >
               Tentar Novamente
             </button>
@@ -155,7 +155,7 @@ export default function Dashboard() {
                 </p>
                 <Link
                   to="/pessoa-fisica"
-                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
                 >
                   Cadastrar Pessoa Física
                 </Link>
@@ -165,7 +165,7 @@ export default function Dashboard() {
                 {pessoasFisicas.map((pessoa) => (
                   <div
                     key={pessoa.id}
-                    className="p-6 rounded-lg shadow-lg bg-white border border-gray-200"
+                    className="p-6 rounded-lg bg-white border border-gray-200"
                   >
                     <div className="mb-4">
                       <h3 className="text-xl font-bold mb-2 text-black">
@@ -187,7 +187,7 @@ export default function Dashboard() {
                     </div>
                     <button
                       onClick={() => pessoa.id && handleDeleteFisica(pessoa.id)}
-                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
                     >
                       Excluir
                     </button>
@@ -210,7 +210,7 @@ export default function Dashboard() {
                 </p>
                 <Link
                   to="/pessoa-juridica"
-                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
                 >
                   Cadastrar Pessoa Jurídica
                 </Link>
@@ -220,7 +220,7 @@ export default function Dashboard() {
                 {pessoasJuridicas.map((pessoa) => (
                   <div
                     key={pessoa.id}
-                    className="p-6 rounded-lg shadow-lg bg-white border border-gray-200"
+                    className="p-6 rounded-lg bg-white border border-gray-200"
                   >
                     <div className="mb-4">
                       <h3 className="text-xl font-bold mb-2 text-black">
@@ -245,7 +245,7 @@ export default function Dashboard() {
                     </div>
                     <button
                       onClick={() => pessoa.id && handleDeleteJuridica(pessoa.id)}
-                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
                     >
                       Excluir
                     </button>
@@ -260,7 +260,7 @@ export default function Dashboard() {
         <div className="mt-8 text-center">
           <Link
             to="/home"
-            className="inline-block px-6 py-3 rounded-lg font-semibold transition-colors bg-black text-white hover:bg-gray-800"
+            className="inline-block px-6 py-3 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
           >
             Página Principal
           </Link>
@@ -269,4 +269,3 @@ export default function Dashboard() {
     </div>
   );
 }
-

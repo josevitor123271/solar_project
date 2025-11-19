@@ -38,7 +38,7 @@ export default function PhysicalPersonForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Estados dos campos
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
@@ -91,7 +91,7 @@ export default function PhysicalPersonForm() {
       };
 
       await pessoaFisicaAPI.create(pessoaData);
-      
+
       // Redireciona para o Dashboard após sucesso
       navigate('/dashboard');
     } catch (err) {
@@ -105,7 +105,7 @@ export default function PhysicalPersonForm() {
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {error && (
-        <div className="md:col-span-2 p-4 rounded-lg bg-red-100 border border-red-400 text-red-700">
+        <div className="md:col-span-2 p-4 rounded-lg border border-red-400 text-red-700 bg-white">
           <p className="font-semibold">Erro:</p>
           <p>{error}</p>
         </div>
@@ -298,7 +298,7 @@ export default function PhysicalPersonForm() {
       <button
         type="submit"
         disabled={loading}
-        className="md:col-span-2 mt-4 flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 text-white font-semibold rounded-lg hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed bg-black"
+        className="md:col-span-2 mt-4 flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 text-[#111111] font-light cursor-pointer rounded-lg hover:bg-[#99ddcc] transition disabled:opacity-50 disabled:cursor-not-allowed bg-[#bfeadf]"
       >
         {loading ? (
           <>

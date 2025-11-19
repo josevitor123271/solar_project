@@ -18,7 +18,7 @@ export default function PessoaFisica() {
           <div className="mt-6 pt-6 border-t border-gray-300">
             <button
               onClick={() => navigate('/pessoa-juridica')}
-              className="w-full px-6 py-3 font-semibold rounded-lg hover:bg-gray-100 transition-all flex items-center justify-center gap-2 border-2 border-black text-black bg-white"
+              className="w-full px-6 py-3 font-light rounded-full cursor-pointer hover:bg-gray-100 transition-all flex items-center justify-center gap-2 border-2 border-black text-black bg-white"
             >
               <i className="fas fa-building"></i>
               Cadastrar como Pessoa Jurídica
@@ -26,7 +26,7 @@ export default function PessoaFisica() {
             
             <button
               onClick={() => navigate('/')}
-              className="w-full mt-3 px-6 py-3 font-semibold rounded-lg hover:bg-gray-100 transition-all flex items-center justify-center gap-2 border-2 border-gray-400 text-gray-700 bg-white"
+              className="w-full mt-3 px-6 py-3 font-light rounded-full cursor-pointer hover:bg-gray-100 transition-all flex items-center justify-center gap-2 border-2 border-gray-400 text-gray-700 bg-white"
             >
               <i className="fas fa-arrow-left"></i>
               Voltar

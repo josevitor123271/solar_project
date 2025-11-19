@@ -1,0 +1,16 @@
+Cores principais:
+
+#99ddcc (azul esverdeado)
+#f6f6f6 (cinza claro)
+#111111 (preto)
+#bfeadf (azul esverdeado claro)
+#73d0b9 (azul esverdeado médio)
+#ffffff (branco)
+
+Diretrizes de uso:
+
+Para botões: usar #111111 (preto) como background
+Para textos: usar #ffffff (branco) ou #111111 (preto)
+Para cards e inputs: usar #f6f6f6 (cinza claro) como background
+Para links e ícones: usar #111111 (preto)
+Cores adicionais (#99ddcc, #bfeadf, #73d0b9) podem ser usadas em outros casos
