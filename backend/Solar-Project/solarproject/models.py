@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 
 # Estados brasileiros
@@ -34,8 +35,20 @@ ESTADOS_CHOICES = [
 ]
 
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    class Role(models.TextChoices):
+        ADMIN = "ADMIN", "Administrador"
+        CLIENT_PF = "PF", "Pessoa Física"
+        CLIENT_PJ = "PJ", "Pessoa Jurídica"
+    
+    role = models.CharField(max_length=10, choices=Role.choices, default=Role.CLIENT_PF)
+
+
 class PessoaFisica(models.Model):
     """Modelo para Pessoa Física"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='pessoa_fisica', null=True, blank=True)
     cpf = models.CharField(
         max_length=11,
         unique=True,
@@ -69,6 +82,7 @@ class PessoaFisica(models.Model):
 
 class PessoaJuridica(models.Model):
     """Modelo para Pessoa Jurídica"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='pessoa_juridica', null=True, blank=True)
     cnpj = models.CharField(
         max_length=14,
         unique=True,
@@ -95,4 +109,3 @@ class PessoaJuridica(models.Model):
 
     def __str__(self):
         return f'{self.razao_social} - {self.cnpj}'
-

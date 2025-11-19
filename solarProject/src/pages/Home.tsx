@@ -81,7 +81,17 @@ const Home = () => {
     { id: 21, nome: 'Kit Energia Solar 5kW', descricao: 'Sistema completo para médias residências', preco: 15000.00, disponivel: true },
     { id: 22, nome: 'Sensor de Temperatura', descricao: 'Monitoramento de temperatura dos módulos', preco: 45.00, disponivel: false },
     { id: 23, nome: 'Parafuso de Fixação Solar', descricao: 'Parafusos especiais para montagem', preco: 0.50, disponivel: true },
-    { id: 24, nome: 'Estrutura Solo 10kW', descricao: 'Estrutura para instalação no solo', preco: 3200.00, disponivel: true }
+    { id: 24, nome: 'Estrutura Solo 10kW', descricao: 'Estrutura para instalação no solo', preco: 3200.00, disponivel: true },
+    
+    // Adicionando mais produtos fora de estoque
+    { id: 25, nome: 'Módulo Solar 500W', descricao: 'Módulo fotovoltaico de alta eficiência', preco: 1199.90, disponivel: false },
+    { id: 26, nome: 'Inversor 3kW', descricao: 'Inversor monofásico para residências', preco: 2800.00, disponivel: false },
+    { id: 27, nome: 'Controlador MPPT 40A', descricao: 'Controlador de carga avançado', preco: 350.00, disponivel: false },
+    { id: 28, nome: 'Estrutura Metálica 4m²', descricao: 'Estrutura de suporte para módulos', preco: 750.00, disponivel: false },
+    { id: 29, nome: 'Cabo Solar 4mm', descricao: 'Cabo vermelho para sistemas fotovoltaicos', preco: 75.00, disponivel: false },
+    { id: 30, nome: 'Fusiveira 63A', descricao: 'Proteção para circuitos CC', preco: 95.00, disponivel: false },
+    { id: 31, nome: 'Kit Energia Solar 8kW', descricao: 'Solução completa para grandes residências', preco: 22000.00, disponivel: false },
+    { id: 32, nome: 'Bateria 5kWh', descricao: 'Bateria de lítio para armazenamento', preco: 6500.00, disponivel: false }
   ]);
 
   // Estado para armazenar os produtos filtrados
@@ -327,7 +337,7 @@ const Home = () => {
                     <div className="bg-gray-100 rounded-lg h-32 flex items-center justify-center mb-4"> {/* Altura fixa para a imagem */}
                         <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
                     </div>
-                    <div className="flex-grow"> {/* Permite que esta seção cresça para preencher o espaço */}
+                    <div className="grow"> {/* Permite que esta seção cresça para preencher o espaço */}
                         <h3 className="font-semibold text-gray-800 mb-1 truncate">{produto.nome}</h3>
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2 h-10">{produto.descricao}</p>
                         {/* Indicador de disponibilidade */}
