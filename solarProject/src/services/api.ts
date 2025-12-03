@@ -34,6 +34,7 @@ export interface PessoaJuridica {
   complemento?: string;
   logradouro: string;
   bairro: string;
+  cidade: string;
   estado: string;
   numero: string;
   pais: string;
@@ -130,4 +131,3 @@ export const pessoaJuridicaAPI = {
     });
   },
 };
-

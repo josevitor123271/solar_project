@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { pessoaFisicaAPI, pessoaJuridicaAPI } from '../services/api';
 import type { PessoaFisica, PessoaJuridica } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Dashboard() {
+  const { logout } = useAuth(); // Adiciona o hook de autenticação
   const [pessoasFisicas, setPessoasFisicas] = useState<PessoaFisica[]>([]);
   const [pessoasJuridicas, setPessoasJuridicas] = useState<PessoaJuridica[]>([]);
   const [loading, setLoading] = useState(true);
@@ -94,14 +96,20 @@ export default function Dashboard() {
           </p>
         </div>
 
-        {/* Botão de voltar */}
-        <div className="mb-6">
+        {/* Botão de voltar e Logout */}
+        <div className="mb-6 flex justify-between">
           <Link
             to="/"
-            className="inline-block px-4 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
+            className="inline-block px-4 py-2 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
           >
             ← Voltar para Registro
           </Link>
+          <button
+            onClick={logout}
+            className="inline-block px-4 py-2 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
+          >
+            Sair
+          </button>
         </div>
 
         {/* Erro */}
@@ -111,7 +119,7 @@ export default function Dashboard() {
             <p>{error}</p>
             <button
               onClick={loadData}
-              className="mt-2 px-4 py-2 text-[#111111] rounded hover:bg-[#99ddcc] bg-[#bfeadf]"
+              className="mt-2 px-4 py-2 text-[#FFFFFF] rounded hover:bg-[#1D1616] bg-[#1D1616]"
             >
               Tentar Novamente
             </button>
@@ -155,7 +163,7 @@ export default function Dashboard() {
                 </p>
                 <Link
                   to="/pessoa-fisica"
-                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
+                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
                 >
                   Cadastrar Pessoa Física
                 </Link>
@@ -187,7 +195,7 @@ export default function Dashboard() {
                     </div>
                     <button
                       onClick={() => pessoa.id && handleDeleteFisica(pessoa.id)}
-                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
+                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
                     >
                       Excluir
                     </button>
@@ -210,7 +218,7 @@ export default function Dashboard() {
                 </p>
                 <Link
                   to="/pessoa-juridica"
-                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
+                  className="inline-block mt-4 px-6 py-2 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
                 >
                   Cadastrar Pessoa Jurídica
                 </Link>
@@ -241,11 +249,11 @@ export default function Dashboard() {
                       {pessoa.site && <p><strong className="text-black">Site:</strong> {pessoa.site}</p>}
                       <p><strong className="text-black">Endereço:</strong> {pessoa.logradouro}, {pessoa.numero}</p>
                       <p><strong className="text-black">Bairro:</strong> {pessoa.bairro}</p>
-                      <p><strong className="text-black">Estado:</strong> {pessoa.estado}</p>
+                      <p><strong className="text-black">Cidade:</strong> {pessoa.cidade} - {pessoa.estado}</p>
                     </div>
                     <button
                       onClick={() => pessoa.id && handleDeleteJuridica(pessoa.id)}
-                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
+                      className="w-full px-4 py-2 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
                     >
                       Excluir
                     </button>
@@ -260,7 +268,7 @@ export default function Dashboard() {
         <div className="mt-8 text-center">
           <Link
             to="/home"
-            className="inline-block px-6 py-3 rounded-lg font-semibold transition-colors text-[#111111] hover:bg-[#99ddcc] bg-[#bfeadf]"
+            className="inline-block px-6 py-3 rounded-lg font-semibold transition-colors text-[#FFFFFF] hover:bg-[#1D1616] bg-[#1D1616]"
           >
             Página Principal
           </Link>

@@ -3,6 +3,7 @@ import { Sun, Search, Menu } from 'lucide-react';
 import FilteProductSidebar from '../components/FilteProductSidebar';
 import CartSidebar from '../components/CartSidebar';
 import { motion } from 'framer-motion';
+import { useAuth } from '../contexts/AuthContext';
 
 type Categoria =
     | 'Módulos'
@@ -45,6 +46,8 @@ interface Filtros {
 }
 
 const Home = () => {
+  const { logout } = useAuth(); // Adiciona o hook de autenticação
+  
   // const [categoriaSelecionada, setCategoriaSelecionada] = useState<Categoria>('Módulos');
 
   // Itens mockados do carrinho
@@ -196,7 +199,7 @@ const Home = () => {
                   }}
                   whileHover={{ 
                     scale: 1.05,
-                    color: "#4B5563"
+                    color: "#1D1616"
                   }}
                 >
                   SolarProject
@@ -228,7 +231,7 @@ const Home = () => {
             <motion.a 
               href="#" 
               className="text-black font-semibold hover:text-gray-600 transition-colors"
-              whileHover={{ y: -2, color: "#4B5563" }}
+              whileHover={{ y: -2, color: "#1D1616" }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -237,7 +240,7 @@ const Home = () => {
             <motion.a 
               href="#" 
               className="text-black font-light hover:text-gray-600 transition-colors"
-              whileHover={{ y: -2, color: "#4B5563" }}
+              whileHover={{ y: -2, color: "#1D1616" }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -246,7 +249,7 @@ const Home = () => {
             <motion.a 
               href="#" 
               className="text-black font-light hover:text-gray-600 transition-colors"
-              whileHover={{ y: -2, color: "#4B5563" }}
+              whileHover={{ y: -2, color: "#1D1616" }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -255,7 +258,7 @@ const Home = () => {
             <motion.a 
               href="#" 
               className="text-black font-light hover:text-gray-600 transition-colors"
-              whileHover={{ y: -2, color: "#4B5563" }}
+              whileHover={{ y: -2, color: "#1D1616" }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -263,7 +266,7 @@ const Home = () => {
             </motion.a>
           </motion.div>
 
-          {/* Coluna 3: Ícones de Pesquisa e Menu */}
+          {/* Coluna 3: Ícones de Pesquisa, Menu e Logout */}
           <motion.div 
             className="flex items-center justify-end gap-4"
             initial={{ x: 50, opacity: 0 }}
@@ -293,6 +296,18 @@ const Home = () => {
               transition={{ type: "spring", stiffness: 400 }}
             >
               <Menu className="w-6 h-6 cursor-pointer" />
+            </motion.button>
+            <motion.button 
+              onClick={logout}
+              className="text-black hover:text-gray-600 transition-colors p-2"
+              whileHover={{ 
+                scale: 1.1,
+                transition: { duration: 0.3 }
+              }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <span className="text-sm font-medium">Sair</span>
             </motion.button>
           </motion.div>
         </div>
@@ -342,7 +357,7 @@ const Home = () => {
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2 h-10">{produto.descricao}</p>
                         {/* Indicador de disponibilidade */}
                         <div className="flex items-center mb-2">
-                          <span className={`inline-block w-3 h-3 rounded-full mr-2 ${produto.disponivel ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                          <span className={`inline-block w-3 h-3 rounded-full mr-2 ${produto.disponivel ? 'bg-[#1D1616]' : 'bg-red-500'}`}></span>
                           <span className="text-xs text-gray-500">
                             {produto.disponivel ? 'Em estoque' : 'Fora de estoque'}
                           </span>
@@ -358,7 +373,7 @@ const Home = () => {
                             }`}
                             whileHover={produto.disponivel ? { 
                                 scale: 1.05,
-                                backgroundColor: "#374151"
+                                backgroundColor: "#1D1616"
                             } : {}}
                             whileTap={produto.disponivel ? { scale: 0.95 } : {}}
                             initial={{ opacity: 0 }}

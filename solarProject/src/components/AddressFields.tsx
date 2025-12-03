@@ -7,9 +7,9 @@ export default function AddressFields() {
           type="text"
           placeholder="00000-000"
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
 
@@ -19,9 +19,9 @@ export default function AddressFields() {
           type="text"
           placeholder="Rua, Avenida..."
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
       <div>
@@ -29,9 +29,9 @@ export default function AddressFields() {
         <input
           type="text"
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
 
@@ -41,9 +41,9 @@ export default function AddressFields() {
           type="text"
           placeholder="Apt, Bloco..."
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
       <div>
@@ -51,9 +51,9 @@ export default function AddressFields() {
         <input
           type="text"
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
 
@@ -62,9 +62,9 @@ export default function AddressFields() {
         <input
           type="text"
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
       <div>
@@ -72,9 +72,9 @@ export default function AddressFields() {
         <input
           type="text"
           className="w-full px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:shadow-sm placeholder:text-gray-400"
-          style={{ borderColor: '#819067' }}
-          onFocus={(e) => e.target.style.borderColor = '#0A400C'}
-          onBlur={(e) => e.target.style.borderColor = '#819067'}
+          style={{ borderColor: '#1D1616' }}
+          onFocus={(e) => e.target.style.borderColor = '#1D1616'}
+          onBlur={(e) => e.target.style.borderColor = '#1D1616'}
         />
       </div>
 
@@ -85,7 +85,7 @@ export default function AddressFields() {
           value="Brasil"
           readOnly
           className="w-full px-4 py-3 border rounded-lg text-base cursor-not-allowed"
-          style={{ borderColor: '#819067', backgroundColor: '#FEFAE0', color: '#0A400C' }}
+          style={{ borderColor: '#1D1616', backgroundColor: '#1D1616', color: '#FFFFFF' }}
         />
       </div>
     </>

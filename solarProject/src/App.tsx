@@ -1,6 +1,7 @@
 // src/App.tsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RegistrationPage from './components/RegistrationPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Styles
 import './App.css';
@@ -18,19 +19,30 @@ import Dashboard from './pages/Dashboard';
 
 // Home
 import Home from './pages/Home';
+import WarningPage from './pages/WarningPage';
+
+// Auth Context
+import { AuthProvider } from './contexts/AuthContext';
 
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-white">
-        <Routes>
-          <Route path="/" element={<RegistrationPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/pessoa-fisica" element={<PessoaFisica />} />
-          <Route path="/pessoa-juridica" element={<PessoaJuridica />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <div className="min-h-screen bg-white">
+          <Routes>
+            <Route path="/" element={<RegistrationPage />} />
+            <Route path="/home" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+            <Route path="/pessoa-fisica" element={<PessoaFisica />} />
+            <Route path="/pessoa-juridica" element={<PessoaJuridica />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/warning" element={<WarningPage />} />
+          </Routes>
+        </div>
+      </AuthProvider>
     </Router>
   );
 }

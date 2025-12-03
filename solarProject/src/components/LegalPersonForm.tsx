@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { pessoaJuridicaAPI } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
+import { motion } from "framer-motion";
 
 // Função de máscara reutilizável (sem dependências externas)
 const applyMask = (
@@ -45,6 +47,7 @@ const applyMask = (
 
 export default function LegalPersonForm() {
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth(); // Adiciona o hook de autenticação
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -61,6 +64,7 @@ export default function LegalPersonForm() {
   const [logradouro, setLogradouro] = useState('');
   const [numero, setNumero] = useState('');
   const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
   const [complemento, setComplemento] = useState('');
 
@@ -96,6 +100,7 @@ export default function LegalPersonForm() {
         complemento: complemento || undefined,
         logradouro: logradouro,
         bairro: bairro,
+        cidade: cidade,
         estado: estado,
         numero: numero,
         pais: 'Brasil',
@@ -103,8 +108,12 @@ export default function LegalPersonForm() {
 
       await pessoaJuridicaAPI.create(pessoaData);
       
-      // Redireciona para o Dashboard após sucesso
-      navigate('/dashboard');
+      // Define o usuário como autenticado após o registro bem-sucedido
+      localStorage.setItem('userRegistered', 'true');
+      setIsAuthenticated(true);
+
+      // Redireciona para a página Home após sucesso
+      navigate('/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao cadastrar pessoa jurídica');
       console.error('Erro ao cadastrar:', err);
@@ -114,15 +123,31 @@ export default function LegalPersonForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <motion.form 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      onSubmit={handleSubmit} 
+      className="grid grid-cols-1 md:grid-cols-2 gap-4"
+    >
       {error && (
-        <div className="md:col-span-2 p-4 rounded-lg border border-red-400 text-red-700 bg-white">
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:col-span-2 p-4 rounded-lg border border-red-400 text-red-700 bg-white"
+        >
           <p className="font-semibold">Erro:</p>
           <p>{error}</p>
-        </div>
+        </motion.div>
       )}
       {/* Razão Social */}
-      <div className="md:col-span-2">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        className="md:col-span-2"
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Razão Social</label>
         <input
           type="text"
@@ -132,10 +157,15 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
       {/* Nome Fantasia */}
-      <div className="md:col-span-2">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
+        className="md:col-span-2"
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Nome Fantasia</label>
         <input
           type="text"
@@ -145,10 +175,14 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
       {/* CNPJ com máscara */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.3 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">CNPJ</label>
         <div className="relative">
           <input
@@ -162,10 +196,14 @@ export default function LegalPersonForm() {
           />
           <i className="fas fa-building absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Inscrição Estadual com máscara */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.4 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Inscrição Estadual</label>
         <input
           type="text"
@@ -175,10 +213,14 @@ export default function LegalPersonForm() {
           maxLength={15}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
       {/* Data de abertura */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.5 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Data de abertura</label>
         <input
           type="date"
@@ -187,10 +229,14 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-black bg-white"
         />
-      </div>
+      </motion.div>
 
       {/* E-mail comercial */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.6 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">E-mail comercial</label>
         <div className="relative">
           <input
@@ -203,10 +249,14 @@ export default function LegalPersonForm() {
           />
           <i className="fas fa-envelope absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Telefone com máscara */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.7 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Telefone principal</label>
         <div className="relative">
           <input
@@ -220,10 +270,14 @@ export default function LegalPersonForm() {
           />
           <i className="fas fa-phone absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Site institucional */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.8 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Site institucional (opcional)</label>
         <div className="relative">
           <input
@@ -235,10 +289,15 @@ export default function LegalPersonForm() {
           />
           <i className="fas fa-globe absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Endereço */}
-      <div className="md:col-span-2">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.9 }}
+        className="md:col-span-2"
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">CEP</label>
         <input
           type="text"
@@ -254,9 +313,13 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.0 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Logradouro</label>
         <input
           type="text"
@@ -266,8 +329,12 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
-      <div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.1 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Número</label>
         <input
           type="text"
@@ -276,9 +343,13 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.2 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Complemento</label>
         <input
           type="text"
@@ -287,8 +358,12 @@ export default function LegalPersonForm() {
           placeholder="Apt, Bloco..."
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
-      <div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.3 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Bairro</label>
         <input
           type="text"
@@ -297,9 +372,28 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
-      <div>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.4 }}
+      >
+        <label className="block text-left text-sm font-medium text-gray-600 mb-1">Cidade</label>
+        <input
+          type="text"
+          value={cidade}
+          onChange={(e) => setCidade(e.target.value)}
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
+        />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.5 }}
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">Estado</label>
         <input
           type="text"
@@ -310,9 +404,14 @@ export default function LegalPersonForm() {
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-gray-400 text-black bg-white"
         />
-      </div>
+      </motion.div>
 
-      <div className="md:col-span-2">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 1.6 }}
+        className="md:col-span-2"
+      >
         <label className="block text-left text-sm font-medium text-gray-600 mb-1">País</label>
         <input
           type="text"
@@ -320,13 +419,18 @@ export default function LegalPersonForm() {
           readOnly
           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base cursor-not-allowed bg-gray-100 text-gray-600"
         />
-      </div>
+      </motion.div>
 
       {/* Botão de cadastro */}
-      <button
+      <motion.button
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 1.7 }}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         type="submit"
         disabled={loading}
-        className="md:col-span-2 mt-4 flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 text-[#111111] font-light rounded-lg hover:bg-[#99ddcc] transition disabled:opacity-50 disabled:cursor-not-allowed bg-[#bfeadf]"
+        className="md:col-span-2 mt-4 flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 text-[#FFFFFF] font-light rounded-lg hover:bg-[#1D1616] transition disabled:opacity-50 disabled:cursor-not-allowed bg-[#1D1616]"
       >
         {loading ? (
           <>
@@ -337,7 +441,7 @@ export default function LegalPersonForm() {
             <i className="fas fa-building"></i> Cadastrar Empresa
           </>
         )}
-      </button>
-    </form>
+      </motion.button>
+    </motion.form>
   );
 }

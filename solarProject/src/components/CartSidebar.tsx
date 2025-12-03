@@ -42,7 +42,7 @@ export default function CartSidebar({ itensCarrinho, onRemoveItem, onUpdateQuant
           initial={{ scale: 0 }}
           animate={{ 
             scale: 1,
-            backgroundColor: itensCarrinho.length > 0 ? "#10B981" : "#E5E7EB",
+            backgroundColor: itensCarrinho.length > 0 ? "#1D1616" : "#E5E7EB",
             color: itensCarrinho.length > 0 ? "#FFFFFF" : "#1F2937"
           }}
           transition={{ 
@@ -141,10 +141,10 @@ export default function CartSidebar({ itensCarrinho, onRemoveItem, onUpdateQuant
           </div>
         </div>
         <motion.button
-          className="w-full bg-[#111111] hover:bg-[#111111] text-white font-medium py-3 rounded-lg transition-colors duration-200"
+          className="w-full bg-[#1D1616] hover:bg-[#1D1616] text-white font-medium py-3 rounded-lg transition-colors duration-200"
           whileHover={{ 
             scale: 1.02,
-            boxShadow: "0 4px 15px rgba(72, 187, 120, 0.4)"
+            boxShadow: "0 4px 15px rgba(29, 22, 22, 0.4)"
           }}
           whileTap={{ scale: 0.98 }}
           initial={{ opacity: 0 }}
