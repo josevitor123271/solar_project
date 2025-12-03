@@ -37,9 +37,13 @@ const WarningPage = () => {
                         damping: 20,
                         delay: 0.3 
                     }}
-                    className="text-5xl mb-4"
+                    className="flex justify-center mb-4"
                 >
-                    ⚠️
+                    <img 
+                        src="../../../images/cat_meme.jpg" 
+                        alt="Gato meme" 
+                        className="w-32 h-32 object-contain rounded-lg"
+                    />
                 </motion.div>
                 
                 <motion.h1 
