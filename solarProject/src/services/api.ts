@@ -40,6 +40,17 @@ export interface PessoaJuridica {
   pais: string;
 }
 
+// Tipo para dados do usuário
+export interface UserData {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  pessoa_fisica?: PessoaFisica;
+  pessoa_juridica?: PessoaJuridica;
+}
+
 // Função auxiliar para fazer requisições
 async function fetchAPI(endpoint: string, options: RequestInit = {}) {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -51,8 +62,20 @@ async function fetchAPI(endpoint: string, options: RequestInit = {}) {
   });
 
   if (!response.ok) {
+    // Tratamento especial para erros de autenticação
+    if (response.status === 401) {
+      // Token inválido ou expirado - apenas lançamos um erro específico
+      // Não removemos os itens do localStorage aqui para evitar logout automático
+      throw new Error('UNAUTHORIZED');
+    }
+    
     const error = await response.json().catch(() => ({ detail: 'Erro na requisição' }));
     throw new Error(error.detail || `HTTP error! status: ${response.status}`);
+  }
+
+  // Para requisições DELETE bem-sucedidas (status 204), não há conteúdo para parsear
+  if (response.status === 204 || response.statusText === 'No Content') {
+    return;
   }
 
   return response.json();
@@ -128,6 +151,24 @@ export const pessoaJuridicaAPI = {
   delete: async (id: number): Promise<void> => {
     await fetchAPI(`/pessoas-juridicas/${id}/`, {
       method: 'DELETE',
+    });
+  },
+};
+
+// API para Usuário
+export const userAPI = {
+  // Obter perfil do usuário autenticado
+  getProfile: async (): Promise<UserData> => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      throw new Error('Token de autenticação não encontrado');
+    }
+    
+    return fetchAPI('/users/profile/', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
     });
   },
 };

@@ -47,7 +47,7 @@ const applyMask = (
 
 export default function LegalPersonForm() {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuth(); // Adiciona o hook de autenticação
+  const { setIsAuthenticated, setUserData } = useAuth(); // Adiciona o hook de autenticação
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -108,6 +108,17 @@ export default function LegalPersonForm() {
 
       await pessoaJuridicaAPI.create(pessoaData);
       
+      // Salvar dados do usuário no localStorage
+      const userData = {
+        name: razaoSocial,
+        email: emailComercial,
+        cpf: cnpj, // Para pessoa jurídica, usamos o CNPJ
+        accountType: 'Pessoa Jurídica' as const
+      };
+      
+      localStorage.setItem('userData', JSON.stringify(userData));
+      setUserData(userData);
+
       // Define o usuário como autenticado após o registro bem-sucedido
       localStorage.setItem('userRegistered', 'true');
       setIsAuthenticated(true);

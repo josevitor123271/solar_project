@@ -166,7 +166,7 @@ export default function FilteProductSidebar({ onFiltrosChange }: FilteProductSid
             Limpar tudo
           </motion.button>
         </div>
-        <p className="text-sm text-gray-600">Ajuste os filtros para encontrar os produtos ideais</p>
+        <p className="text-base text-gray-600">Ajuste os filtros para encontrar os produtos ideais</p>
       </motion.div>
 
       {/* Conteúdo dos filtros */}

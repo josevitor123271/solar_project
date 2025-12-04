@@ -16,6 +16,15 @@ class PessoaJuridicaSerializer(serializers.ModelSerializer):
         fields = '__all__' # Todos os campos do modelo PessoaJuridica
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    pessoa_fisica = PessoaFisicaSerializer(read_only=True)
+    pessoa_juridica = PessoaJuridicaSerializer(read_only=True)
+    
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'pessoa_fisica', 'pessoa_juridica']
+
+
 class RegisterUserSerializer(serializers.ModelSerializer):
     pessoa_fisica = PessoaFisicaSerializer(required=False)
     pessoa_juridica = PessoaJuridicaSerializer(required=False)

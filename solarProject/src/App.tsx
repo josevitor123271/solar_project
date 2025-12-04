@@ -20,6 +20,7 @@ import Dashboard from './pages/Dashboard';
 // Home
 import Home from './pages/Home';
 import WarningPage from './pages/WarningPage';
+import SettingsPage from './pages/SettingsPage';
 
 // Auth Context
 import { AuthProvider } from './contexts/AuthContext';
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="/pessoa-juridica" element={<PessoaJuridica />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/warning" element={<WarningPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </div>
       </AuthProvider>

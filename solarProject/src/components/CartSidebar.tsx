@@ -15,7 +15,10 @@ interface CartSidebarProps {
 
 export default function CartSidebar({ itensCarrinho, onRemoveItem, onUpdateQuantity }: CartSidebarProps) {
   // Calcular subtotal e total
-  const subtotal = itensCarrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+  const subtotal = itensCarrinho.reduce((acc, item) => {
+    return acc + (item.preco * item.quantidade);
+  }, 0);
+  
   const total = subtotal; // Por enquanto sem taxas ou descontos
 
   // Função para formatar valores monetários
@@ -85,7 +88,7 @@ export default function CartSidebar({ itensCarrinho, onRemoveItem, onUpdateQuant
               >
                 <div className="grow">
                   <h3 className="font-medium text-gray-800">{item.nome}</h3>
-                  <p className="text-gray-600 text-sm">{formatarMoeda(item.preco)}</p>
+                  <p className="text-gray-600 text-base">{formatarMoeda(item.preco)}</p>
                   <div className="flex items-center mt-2">
                     <button
                       onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantidade - 1))}

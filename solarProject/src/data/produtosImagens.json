@@ -1,0 +1,164 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Módulo Solar 550W",
+      "imagemUrl": "https://pt.dreamstime.com/foto-de-stock-mini-painel-solar-image53144758"
+    },
+    {
+      "id": 2,
+      "nome": "Inversor 5kW",
+      "imagemUrl": "https://www.pngegg.com/pt/png-cplkz/download"
+    },
+    {
+      "id": 3,
+      "nome": "Cabo Solar 6mm",
+      "imagemUrl": "https://pt.dreamstime.com/photos-images/fotovoltaica.html"
+    },
+    {
+      "id": 4,
+      "nome": "Estrutura de Fixação",
+      "imagemUrl": "https://psolera.com/pt/noticias/elementos-quadro-controle-strings-guia"
+    },
+    {
+      "id": 5,
+      "nome": "Bateria 10kWh",
+      "imagemUrl": "https://www.istockphoto.com/br/fotos/energia-solar"
+    },
+    {
+      "id": 6,
+      "nome": "Controlador de Carga",
+      "imagemUrl": "https://www.ldsolar.com/pt/products-8188.html"
+    },
+    {
+      "id": 7,
+      "nome": "Kit Completo 3kW",
+      "imagemUrl": "https://www.neosolar.com.br/loja/kit-energia-solar-on-grid/micro-inversor.html"
+    },
+    {
+      "id": 8,
+      "nome": "Microinversor",
+      "imagemUrl": "https://www.neosolar.com.br/loja/kit-energia-solar-on-grid/micro-inversor.html"
+    },
+    {
+      "id": 9,
+      "nome": "Monitor de Energia",
+      "imagemUrl": "https://br.freepik.com/fotos-premium/mulher-monitora-a-producao-de-energia-da-usina-solar-com-um-tablet-digital_35149690.htm"
+    },
+    {
+      "id": 10,
+      "nome": "Proteção contra Surto",
+      "imagemUrl": "https://pt.dsisolar.com/info/surge-protection-for-photovoltaic-systems-17157200033686528.html"
+    },
+    {
+      "id": 11,
+      "nome": "Conector MC4",
+      "imagemUrl": "https://n-volt.pt/produto/mc4-iv-conjunto-de-conectores-cabo-de-painel-solar-fotovoltaico"
+    },
+    {
+      "id": 12,
+      "nome": "Caixa de Passagem",
+      "imagemUrl": "https://fortlevsolar.com.br/caixadepassagem/"
+    },
+    {
+      "id": 13,
+      "nome": "String Box 8 Entradas",
+      "imagemUrl": "https://psolera.com/pt/noticias/elementos-quadro-controle-strings-guia"
+    },
+    {
+      "id": 14,
+      "nome": "Medidor Bidirecional",
+      "imagemUrl": "https://canalsolar.com.br/medidores-inteligentes-de-energia-em-sistemas-fotovoltaicos/"
+    },
+    {
+      "id": 15,
+      "nome": "Pelicula Anti Reflexo",
+      "imagemUrl": "https://solarscreen.eu/pt/products/silver-60-xc"
+    },
+    {
+      "id": 16,
+      "nome": "Kit Fixação Telhado",
+      "imagemUrl": "https://www.sunprop.com.br/suporte-l-fixacao-de-estrutura-energia-solar-5-pecas"
+    },
+    {
+      "id": 17,
+      "nome": "Inversor Híbrido 8kW",
+      "imagemUrl": "https://www.pngegg.com/pt/png-cplkz/download"
+    },
+    {
+      "id": 18,
+      "nome": "Banco de Baterias 15kWh",
+      "imagemUrl": "https://www.istockphoto.com/br/fotos/energia-solar"
+    },
+    {
+      "id": 19,
+      "nome": "Cabo Photovoltaic 10mm",
+      "imagemUrl": "https://pt.dreamstime.com/photos-images/fotovoltaica.html"
+    },
+    {
+      "id": 20,
+      "nome": "Disjuntor CC 63A",
+      "imagemUrl": "https://www.dgtec.com.br/energia-solar/protecao/disjuntor-dccc-16a-1000v-bipolar-p-paineis-solar-baterias"
+    },
+    {
+      "id": 21,
+      "nome": "Kit Energia Solar 5kW",
+      "imagemUrl": "https://www.neosolar.com.br/loja/kit-energia-solar-on-grid/micro-inversor.html"
+    },
+    {
+      "id": 22,
+      "nome": "Sensor de Temperatura",
+      "imagemUrl": "https://solaredge.com/br/produtos/sensores-e-medidores/sensores-ambientais"
+    },
+    {
+      "id": 23,
+      "nome": "Parafuso de Fixação Solar",
+      "imagemUrl": "https://www.sunprop.com.br/conectores/parafuso-solar-200mm-fibrocimento-p-madeira-c-l-10-pecas"
+    },
+    {
+      "id": 24,
+      "nome": "Estrutura Solo 10kW",
+      "imagemUrl": "https://psolera.com/pt/noticias/elementos-quadro-controle-strings-guia"
+    },
+    {
+      "id": 25,
+      "nome": "Módulo Solar 500W",
+      "imagemUrl": "https://pt.dreamstime.com/foto-de-stock-mini-painel-solar-image53144758"
+    },
+    {
+      "id": 26,
+      "nome": "Inversor 3kW",
+      "imagemUrl": "https://www.pngegg.com/pt/png-cplkz/download"
+    },
+    {
+      "id": 27,
+      "nome": "Controlador MPPT 40A",
+      "imagemUrl": "https://www.ldsolar.com/pt/products-8188.html"
+    },
+    {
+      "id": 28,
+      "nome": "Estrutura Metálica 4m²",
+      "imagemUrl": "https://psolera.com/pt/noticias/elementos-quadro-controle-strings-guia"
+    },
+    {
+      "id": 29,
+      "nome": "Cabo Solar 4mm",
+      "imagemUrl": "https://pt.dreamstime.com/photos-images/fotovoltaica.html"
+    },
+    {
+      "id": 30,
+      "nome": "Fusiveira 63A",
+      "imagemUrl": "https://www.dgtec.com.br/energia-solar/protecao/disjuntor-dccc-16a-1000v-bipolar-p-paineis-solar-baterias"
+    },
+    {
+      "id": 31,
+      "nome": "Kit Energia Solar 8kW",
+      "imagemUrl": "https://www.neosolar.com.br/loja/kit-energia-solar-on-grid/micro-inversor.html"
+    },
+    {
+      "id": 32,
+      "nome": "Bateria 5kWh",
+      "imagemUrl": "https://www.istockphoto.com/br/fotos/energia-solar"
+    }
+  ]
+}

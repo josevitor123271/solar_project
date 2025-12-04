@@ -38,7 +38,7 @@ const applyMask = (
 
 export default function PhysicalPersonForm() {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuth(); // Adiciona o hook de autenticação
+  const { setIsAuthenticated, setUserData } = useAuth(); // Adiciona o hook de autenticação
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -94,6 +94,17 @@ export default function PhysicalPersonForm() {
       };
 
       await pessoaFisicaAPI.create(pessoaData);
+
+      // Salvar dados do usuário no localStorage
+      const userData = {
+        name: nomeCompleto,
+        email: email,
+        cpf: cpf,
+        accountType: 'Pessoa Física' as const
+      };
+      
+      localStorage.setItem('userData', JSON.stringify(userData));
+      setUserData(userData);
 
       // Define o usuário como autenticado após o registro bem-sucedido
       localStorage.setItem('userRegistered', 'true');
